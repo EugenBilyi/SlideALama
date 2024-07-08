@@ -1,0 +1,475 @@
+table {
+    border-collapse: collapse;
+    margin: auto;
+    /*border: 4px double black;*/
+    padding: 5px;
+    position: relative;
+    margin-bottom: 50px;
+}
+
+td {
+    width: 100px;  /* Изменим размеры клеток, чтобы подходили под размеры изображений */
+    height: 100px;
+}
+
+body {
+    background-color: lightgrey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+#rulesDisplay {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    max-width: 250px;  /* Ограничение ширины для больших экранов */
+}
+
+#rulesDisplay h2 {
+    font-size: 1.2em;
+    color: navy;
+    text-align: center;
+}
+
+#rulesDisplay ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+#rulesDisplay li {
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+#rulesDisplay img {
+    width: 20px;
+    height: auto;
+    vertical-align: middle;
+}
+
+#symbolDisplay {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+#randomButton {
+    position: fixed;
+    width: 80px;
+    height: 40px;
+    bottom: 300px;
+    right: 2.6%;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    color: #000000;
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+#randomButton:hover {
+    cursor: pointer;
+}
+
+#currentSymbol, #nextSymbol {
+    font-size: 1.2em;
+    color: navy;
+}
+
+
+.subButtonTop, .subButtonLeft, .subButtonRight {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;  /* Добавление плавного перехода для трансформации и фильтра */
+}
+
+.subButtonTop img, .subButtonLeft img, .subButtonRight img {
+    transition: transform 0.3s ease;  /* Плавность изменения размера */
+    display: block;
+    margin: auto;
+    width: 50px; /* Размер картинки стрелки */
+}
+
+.subButtonTop:hover, .subButtonLeft:hover, .subButtonRight:hover {
+    transform: scale(1.1);  /* Увеличение размера кнопки */
+    filter: brightness(1.2);  /* Увеличение яркости иконки */
+}
+
+.subButtonTop:hover img, .subButtonLeft:hover img, .subButtonRight:hover img {
+    transform: scale(1.1);  /* Увеличение размера изображения стрелки */
+}
+
+
+
+.subButtonTop{
+    margin: 0px 22px 15px 22px;
+}
+
+.top-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+/* Стили для кнопок слева и справа от таблицы */
+.subButtonLeft, .subButtonRight {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Убедитесь, что кнопки не налагаются на контент таблицы */
+.subButtonLeft {
+    float: left;
+}
+
+.subButtonRight {
+    float: right;
+}
+
+/* Сброс позиционирования для изображений в кнопках */
+.subButtonTop img, .subButtonLeft img, .subButtonRight img {
+    display: block;
+    margin: auto;
+}
+
+.everyCell{
+    border: 4px double black;
+}
+
+.anim_logo {
+    position: absolute;
+    z-index: -1;
+    width: 100px;
+    height: auto;
+    opacity: 0.5;
+    top: 0;
+    left: 21%;
+}
+
+.WelcomeText {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Отступ между текстом и логотипом */
+    font-size: 2em; /* Увеличиваем размер шрифта для улучшения видимости */
+    color: navy; /* Цвет текста */
+}
+
+.WelcomeText img {
+    height: 64px; /* Высота изображения */
+}
+
+
+.game-cell {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Это гарантирует, что изображения будут полностью видны и не обрезаются */
+}
+
+
+@keyframes logos {
+    0% {
+        left: 5%;
+        top: 5%;
+    }
+    10% {
+        left: 70%;
+        top: 40%;
+    }
+    20% {
+        left: 75%;
+        top: 60%;
+    }
+    30% {
+        left: 25%;
+        top: 20%;
+    }
+    40% {
+        left: 45%;
+        top: 52%;
+    }
+    50% {
+        left: 15%;
+        top: 80%;
+    }
+    60% {
+        left: 65%;
+        top: 60%;
+    }
+    70% {
+        left: 10%;
+        top: 75%;
+    }
+    80% {
+        left: 50%;
+        top: 60%;
+    }
+    90% {
+        left: 30%;
+        top: 20%;
+    }
+    100% {
+        left: 15%;
+        top: 50%;
+    }
+}
+
+@keyframes colors {
+    0% {
+        fill: #DA3522;
+    }
+    10% {
+        fill: #000000;
+    }
+    20% {
+        fill: #7474BF;
+    }
+    30% {
+        fill: #348AC7;
+    }
+    40% {
+        fill: #3A6073;
+    }
+}
+
+.anim_logo {
+    position: absolute;
+    z-index: -1;
+    width: 90px;
+    height: auto;
+    opacity: 0.5;
+    animation: logos 150s linear infinite;
+}
+.anim_logo path {
+    animation: colors 40s linear infinite;
+}
+
+.addH{
+    text-align: center;
+    align-items: center;
+    margin-top: 40px;
+    color: navy;
+}
+
+.input-style {
+    width: 100%;
+    background: transparent;
+    outline: none;
+    border: 3.3px solid #eeeff1;
+    border-radius: 14px;
+    font-size: 16px;
+    color: #404144;
+    padding: 16px 0px 16px 0px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.input-style::placeholder{
+    color: #7474BF;
+}
+
+.button-style {
+    width: 70%;
+    height: 52px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    font-weight: 600;
+    background-image: linear-gradient(to right, #7474BF 0%, #348AC7 51%, #7474BF 100%);
+    text-align: center;
+    text-transform: uppercase;
+    transition: background-size 0.5s, color 0.5s, box-shadow 0.5s, transform 0.5s;
+    background-size: 200% auto;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-radius: 14px;
+    display: block;
+    margin: 10px 0 20px 35px;
+}
+
+.button-style:hover {
+    background-position: right center; /* Изменение направления градиента */
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    transform: scale(1.05); /* Небольшое увеличение размера */
+}
+
+.button-style:active {
+    transform: scale(0.95); /* Уменьшение при нажатии */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Более глубокая тень при нажатии */
+}
+
+.home-button {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    width: 50px; /* Регулируйте размер по желанию */
+    height: 50px;
+    z-index: 1000; /* Убедитесь, что кнопка находится поверх других элементов */
+}
+
+.home-button img {
+    width: 100%;
+    height: auto;
+    display: block; /* Убирает возможные отступы вокруг изображения */
+}
+
+@media only screen and (min-width: 901px) {
+    /* Стили для ноутбуков и настольных ПК */
+    .subButtonTop img, .subButtonLeft img, .subButtonRight img {
+        width: 50px; /* Оригинальный размер */
+    }
+
+    #symbolDisplay {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        width: auto;
+    }
+
+    #currentSymbol, #nextSymbol, #score {
+        font-size: 1.2em; /* Оригинальный размер */
+    }
+
+    table {
+        margin: auto;
+        position: relative;
+        margin-bottom: 50px;
+    }
+
+    td {
+        width: 100px;  /* Оригинальный размер клеток */
+        height: 100px;
+    }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 900px) {
+    /* Стили для планшетов */
+    .subButtonTop img, .subButtonLeft img, .subButtonRight img {
+        width: 40px; /* Уменьшенный размер для планшетов */
+    }
+
+    #symbolDisplay {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        align-items: center;
+        text-align: center;
+        width: 60%; /* Увеличенный размер по сравнению с мобильными устройствами */
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    #currentSymbol, #nextSymbol, #score {
+        font-size: 1em; /* Чуть больше, чем на мобильных */
+    }
+
+    table {
+        width: 100%;
+        height: auto;
+    }
+
+    td {
+        width: 20vw;  /* Пропорциональное увеличение размера */
+        height: 20vw;
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+    /* Уменьшаем размер кнопок для мобильных устройств */
+    .subButtonTop img, .subButtonLeft img, .subButtonRight img {
+        width: 30px;
+    }
+    .subButtonTop{
+        margin: 0px 17px 15px 17px;
+    }
+
+    /* Переносим дисплей символов ниже игрового поля */
+    #symbolDisplay {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        align-items: center;
+        text-align: center;
+        width: 50%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    /* Уменьшаем шрифт информации о счете */
+    #currentSymbol, #nextSymbol, #score {
+        font-size: 0.8em;
+    }
+
+    /* Адаптируем таблицу под мобильный вид */
+    table {
+        width: 100%;
+        height: auto;
+    }
+
+    td {
+        width: 15vw;  /* Процент от ширины экрана */
+        height: 15vw; /* Процент от высоты экрана */
+    }
+
+    .home-button {
+        left: 10px;
+        bottom: 10px;
+        width: 40px;
+        height: 40px;
+    }
+
+    /* Меняем размеры и позиционирование логотипа */
+    .WelcomeText img {
+        height: 40px;
+    }
+
+    .WelcomeText {
+        font-size: 1.5em;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    /* Дополнительные стили для очень маленьких экранов */
+    .subButtonTop img, .subButtonLeft img, .subButtonRight img {
+        width: 20px;
+    }
+
+    #currentSymbol, #nextSymbol, #score {
+        font-size: 0.7em;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    #rulesDisplay {
+        position: relative;  /* Сделать статичным, чтобы не перекрывало другие элементы */
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    #rulesDisplay ul {
+        text-align: center;  /* Центрирование текста на мобильных устройствах */
+    }
+}

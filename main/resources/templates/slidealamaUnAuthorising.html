@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" http-equiv="refresh" content="15">
+    <title>SlideALama Game</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+    <svg class="anim_logo" version="1.0" xmlns="http://www.w3.org/2000/svg" width="1000.000000pt" height="1000.000000pt" viewBox="0 0 1000.000000 1000.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,1000.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none"> <path d="M200 6691 c0 -2046 4 -3152 10 -3237 50 -622 247 -1186 594 -1699 438 -648 1087 -1139 1821 -1378 237 -77 428 -120 690 -154 130 -17 248 -18 1685 -18 1425 0 1556 1 1690 18 812 100 1489 426 2051 987 514 513 866 1176 999 1885 58 310 54 50 57 3523 l3 3182 -4800 0 -4800 0 0 -3109z m9470 -58 c0 -2027 -4 -3076 -10 -3153 -53 -575 -247 -1129 -571 -1620 -523 -795 -1323 -1323 -2244 -1480 -285 -49 -335 -50 -1844 -50 -866 0 -1459 4 -1526 10 -371 34 -729 122 -1044 256 -1179 503 -1984 1608 -2091 2869 -6 78 -10 1197 -10 3163 l0 3042 4670 0 4670 0 0 -3037z"/> <path d="M800 7955 l0 -1245 1475 0 1475 0 2 -1482 3 -1483 1243 -3 1242 -2 0 1485 0 1485 1480 0 1480 0 0 1245 0 1245 -4200 0 -4200 0 0 -1245z"/> <path d="M793 4863 c3 -1353 3 -1380 24 -1508 58 -349 130 -575 275 -857 289 -564 765 -1021 1396 -1338 305 -152 597 -249 987 -327 l140 -28 1390 -3 c988 -2 1423 0 1505 8 685 68 1311 359 1804 839 470 459 750 1006 858 1676 22 139 22 147 25 1528 l4 1387 -1241 0 -1240 0 0 -1480 0 -1480 -1720 0 -1720 0 0 1480 0 1480 -1245 0 -1246 0 4 -1377z"/> </g> </svg>
+    <h1 class="WelcomeText"><img src="/images/lamaLogo.png"></h1>
+
+    <!-- Вывод списка лучших результатов -->
+    <div class="BlockBox">
+        <h2 class="addH">Top Scores</h2>
+        <ul th:each="score : ${scores}">
+            <li th:text="${score.player} + ': ' + ${score.points}"></li>
+        </ul>
+    </div>
+
+    <!-- Вывод комментариев -->
+    <div class="BlockBox">
+        <h2 class="addH">Comments</h2>
+        <ul th:each="comment : ${comments}">
+            <li th:text="${comment.player} + ': ' + ${comment.comment}"></li>
+        </ul>
+    </div>
+
+    <a href="/" class="home-button">
+        <img src="/images/home.png" alt="Home">
+    </a>
+</body>
+</html>
